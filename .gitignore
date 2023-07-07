@@ -30,3 +30,18 @@
 *.exe
 *.out
 *.app
+
+# IDE
+*.bak
+*~
+*.swp
+.vs
+.vscode
+
+# In-Tree-Out-Of-Tree Build DIrs
+out
+build
+build-*
+build.*
+CMakeSettings.json
+
