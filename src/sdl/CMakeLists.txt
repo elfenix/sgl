@@ -7,7 +7,9 @@ file(GLOB_RECURSE SGL_SDL_PUBLIC_HEADER_FILES
     "${PROJECT_SOURCE_DIR}/include/sgl/sdl/*.h"
 )
 
-target_sources(sgl_sdl PRIVATE 
+target_sources(sgl_sdl PRIVATE
+	sgl_translate.h
+	sdl_application.cpp
 	sgl_sdl_app.cpp
 	sys_info.cpp
 )

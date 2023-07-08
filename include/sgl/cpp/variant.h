@@ -12,6 +12,8 @@ namespace sgl
 	namespace features { constexpr bool has_variant = true; }
 	using std::variant;
 	using std::visit;
+	using std::holds_alternative;
+	using std::get;
 }
 
 #endif

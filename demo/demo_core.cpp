@@ -1,5 +1,6 @@
 #include <sgl/version.h>
 #include <sgl/cpp/string_view.h>
+#include <sgl/cpp/span.h>
 #include <iostream>
 
 using namespace sgl;
