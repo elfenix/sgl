@@ -1,6 +1,10 @@
-#include <gtest/gtest.h>
+
 #include <sgl/version.h>
 #include <sgl/xxh32.h>
+#include <sgl/token.h>
+#include <sgl/token_mem_marker.h>
+
+#include <gtest/gtest.h>
 #include <sgl/cpp/array.h>
 
 namespace sgl_test
@@ -51,5 +55,44 @@ namespace sgl_test
     TEST(library_setup, version_present)
     {
         EXPECT_TRUE(sgl::version_major != 0 || sgl::version_minor != 0 || sgl::version_micro != 0);
+    }
+
+    token_mem_marker tmem_marker_1{ "Hello Memory" };
+    token_mem_marker tmem_marker_2{ "Hello Memory2" };
+
+    TEST(token, string_tokens)
+    {
+        token t{"Hello World"};
+
+        std::unordered_map<token, int> v;
+        v[t] = -1;
+
+        EXPECT_TRUE(t == token{"Hello World"});
+        EXPECT_TRUE(v.find("a"sv) == v.end());
+        EXPECT_TRUE(t.is_hash());
+        EXPECT_TRUE(token(t.get_h32(), t.get_l16()) != t);
+        EXPECT_TRUE(!t.is_user());
+    }
+
+    TEST(token, user_tokens)
+    {
+        token t16_1{ 16, 1 };
+        token t16_2{ 16, 2 };
+
+        EXPECT_TRUE(t16_1 != t16_2);
+        EXPECT_TRUE(t16_1.get_l16() == 1);
+        EXPECT_TRUE(t16_2.get_h32() == 16);
+        EXPECT_TRUE(t16_1.is_user());
+    }
+
+    TEST(token, mem_tokens)
+    {
+        token t1{ &tmem_marker_1 };
+        token t2{ &tmem_marker_2 };
+
+        EXPECT_TRUE(t1 != t2);
+        EXPECT_TRUE(t1.get_raw() == reinterpret_cast<uint64_t>(&tmem_marker_1));
+        EXPECT_TRUE(t1.is_object(&tmem_marker_1));
+        EXPECT_FALSE(t1.is_object(&tmem_marker_2));
     }
 }

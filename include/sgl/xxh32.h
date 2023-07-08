@@ -30,7 +30,19 @@
 #include <sgl/cpp/except.h>
 
 namespace sgl {
-	struct xxh32 {
+	class xxh32 {
+	public:
+		static constexpr uint32_t default_seed = 0;
+
+		constexpr explicit xxh32(uint32_t value) : _value{ value } {}
+
+		constexpr xxh32(const char* input, size_t len)
+			: _value{ hash(input, len, default_seed) }
+		{
+		}
+
+		constexpr uint32_t value() const { return _value; }
+
 		static constexpr uint32_t hash(const char* input, size_t len, uint32_t seed) {
 			return finalize((len >= 16 ? h16bytes(input, len, seed) : seed + PRIME5) + static_cast<uint32_t>(len), 
 							(input)+(len & ~0xF),
@@ -96,6 +108,8 @@ namespace sgl {
 		static constexpr uint32_t h16bytes(const char* p, size_t len, const uint32_t seed) {
 			return h16bytes(p, len, seed + PRIME1 + PRIME2, seed + PRIME2, seed, seed - PRIME1);
 		}
+
+		uint32_t _value;
 	};
 }
 
