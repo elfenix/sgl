@@ -11,7 +11,8 @@ namespace sgl {
 			return get_ptr()->clone();
 		}
 
-		ptr clone() const override;
+		ptr clone() override;
+		ptr ref() override;
 		ptr find_subtree(token subtree) override;
 		ptr start_subtree(token subtree) override;
 

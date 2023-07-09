@@ -6,11 +6,15 @@ namespace {
 	void no_deletion(void*, void*) {}
 }
 
-null_state_storage::ptr null_state_storage::clone() const
+null_state_storage::ptr null_state_storage::clone()
 {
 	return make_storage_ptr(get_ptr(), no_deletion, nullptr);
 }
 
+null_state_storage::ptr null_state_storage::ref()
+{
+	return clone();
+}
 
 null_state_storage::ptr null_state_storage::find_subtree(token subtree)
 {

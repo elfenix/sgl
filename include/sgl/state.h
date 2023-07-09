@@ -21,6 +21,8 @@ namespace sgl
 	/// paradigm for interaction.
 	class state {
 	public:
+		class already_exists : public exception {};
+
 		state(const state&) = delete;
 		state& operator=(const state&) = delete;
 

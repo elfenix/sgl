@@ -11,6 +11,7 @@ namespace sgl
 {
 	namespace features { constexpr bool has_except = true; }
 
+	using std::exception;
 	using std::runtime_error;
 	using std::out_of_range;
 	using std::bad_alloc;

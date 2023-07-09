@@ -3,6 +3,8 @@ add_library(sgl)
 target_sources(sgl PRIVATE
         application.cpp
         null_state_storage.cpp
+        state_storage.cpp
+        state_storage_heap.cpp
         version.cpp
 )
 

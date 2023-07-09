@@ -33,12 +33,14 @@ namespace sgl {
 
 		using ptr = unique_ptr<state_storage, deleter>;
 
-		virtual ptr clone() const = 0;
+		virtual ptr clone() = 0;
+		virtual ptr ref() = 0;
 		virtual ptr find_subtree(token subtree) = 0;
 		virtual ptr start_subtree(token subtree) = 0;
 
 	protected:
-		state_storage() {}
+		state_storage();
+		virtual ~state_storage() noexcept;
 
 		static ptr make_storage_ptr(state_storage* ss, deleter::delete_fn fn, void* impl) {
 			return ptr{ ss, deleter{fn, impl} };
