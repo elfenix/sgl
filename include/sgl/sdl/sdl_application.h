@@ -12,6 +12,7 @@ namespace sgl
 		void destroy_window();
 
 		context next_transform() override;
+		void complete_transform(context& completed);
 
 	private:
 		struct impl;

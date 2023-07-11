@@ -16,7 +16,11 @@ public:
 
 		visit(overloaded{
 				[&result](const events::quit_request& q) { std::cout << "Quit Request" << std::endl;  result = application::exit_run; },
-				[](const events::mouse_motion& ex) { std::cout << "Mouse Motion:" << ex.pos.x << "," << ex.pos.y << std::endl; },
+				[&ctx](const events::mouse_motion& ex) {
+					if (ctx.is_drawing()) {
+						ctx.draw_list().add_filled_rect(rect{ ex.pos, size{10, 10} }, color{ 255, 0, 0 });
+					}
+				},
 				[](const events::noop&) { std::cout << "Noop Event" << std::endl; }
 			}, ctx.get_trigger());
 

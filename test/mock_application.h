@@ -8,8 +8,12 @@ namespace sgl_test {
 	class mock_application : public application {
 	public:
 		context next_transform() { return context{
+			this,
 			null_state_storage::instance(), 
 			events::noop{},
-			null_state_storage::instance() }; }
+			null_state_storage::instance(),
+			draw_list::make_ptr(nullptr)}; }
+
+		void complete_transform(context& completed) {}
 	};
 }

@@ -8,6 +8,7 @@ namespace sgl {
 		for (;;) {
 			context ctx = next_transform();
 			if (xform(&ctx, user) == exit_run) { break; }
+			complete_transform(ctx);
 		}
 	}
 }

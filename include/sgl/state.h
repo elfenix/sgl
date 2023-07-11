@@ -36,6 +36,8 @@ namespace sgl
 			return state{ _storage->start_subtree(tok) };
 		}
 
+		state_storage::ptr get_ptr() { return _storage->ref(); }
+
 	private:
 		state_storage::ptr _storage;
 	};

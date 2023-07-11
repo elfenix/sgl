@@ -2,6 +2,8 @@ add_library(sgl)
 
 target_sources(sgl PRIVATE
         application.cpp
+        draw_list.cpp
+        draw_list_vector.cpp
         null_state_storage.cpp
         state_storage.cpp
         state_storage_heap.cpp

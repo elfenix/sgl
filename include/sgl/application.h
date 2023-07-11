@@ -15,7 +15,9 @@ namespace sgl {
 		virtual ~application() noexcept;
 
 		virtual void run(transformer xform, uintptr_t user);
+
 		virtual context next_transform() = 0;
+		virtual void complete_transform(context& completed) = 0;
 
 		template<typename T>
 		void run(T&& fn);
